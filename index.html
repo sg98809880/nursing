@@ -238,7 +238,52 @@ footer{background:var(--navy);color:rgba(255,255,255,.65);padding:3.5rem 0 2rem}
 .wa-btn svg{width:30px;height:30px;fill:white}
 .wa-label{background:var(--navy);color:var(--white);font-size:.78rem;font-weight:600;padding:.35rem .9rem;border-radius:40px;white-space:nowrap;box-shadow:var(--shadow)}
 
+/* ── MOBILE MENU DRAWER ──────────────────────────── */
+.mobile-menu{
+  display:none;
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  z-index:99;
+  background:var(--navy);
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2rem;
+  padding:2rem;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  color:var(--white);
+  font-size:1.4rem;
+  font-family:'Playfair Display',serif;
+  font-weight:600;
+  padding:.5rem 1rem;
+  border-radius:8px;
+  transition:color .2s,background .2s;
+  text-align:center;
+}
+.mobile-menu a:hover{color:var(--gold)}
+.mobile-menu .mobile-cta{
+  background:var(--gold);
+  color:var(--navy) !important;
+  padding:.8rem 2rem;
+  border-radius:8px;
+  font-weight:700;
+  margin-top:.5rem;
+}
+.mobile-menu-close{
+  position:absolute;top:1.2rem;right:1.5rem;
+  background:none;border:none;
+  color:var(--white);font-size:2rem;line-height:1;
+  cursor:pointer;padding:.25rem .5rem;
+}
+/* Animate hamburger to X when open */
+.nav-hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.active span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
 /* ── RESPONSIVE ──────────────────────────────────── */
+
+/* Tablet: 768–1024px */
 @media(max-width:1024px){
   .hero-inner{grid-template-columns:1fr;text-align:center}
   .hero-desc{margin:0 auto 2rem}
@@ -254,19 +299,101 @@ footer{background:var(--navy);color:rgba(255,255,255,.65);padding:3.5rem 0 2rem}
   .why-grid{grid-template-columns:repeat(2,1fr)}
   .testi-grid{grid-template-columns:repeat(2,1fr)}
 }
+
+/* Mobile: ≤640px — comprehensive fixes */
 @media(max-width:640px){
-  section{padding:3.5rem 0}
+
+  /* Base */
+  section{padding:3rem 0}
+  .container{padding:0 1.1rem}
+
+  /* Nav */
   .nav-links{display:none}
   .nav-hamburger{display:flex}
-  .hero h1{font-size:2rem}
-  .hero-stats{flex-wrap:wrap;gap:1.2rem}
-  .why-grid,.testi-grid{grid-template-columns:1fr}
-  .steps{grid-template-columns:1fr 1fr}
-  .form-row{grid-template-columns:1fr}
-  .gallery-grid{grid-template-columns:repeat(2,1fr)}
-  .footer-inner{grid-template-columns:1fr}
-  .footer-bottom{flex-direction:column;text-align:center}
+  .nav-cta{display:none} /* hidden on mobile — use mobile menu CTA instead */
+  nav{padding:.75rem 0}
+
+  /* Hero */
+  .hero{min-height:auto;padding-top:70px;padding-bottom:2.5rem}
+  .hero-inner{gap:2rem}
+  .hero h1{font-size:1.85rem;line-height:1.2}
+  .hero-badge{font-size:.72rem;padding:.35rem .8rem}
+  .hero-desc{font-size:.95rem}
+  .hero-stats{flex-wrap:wrap;gap:1rem;justify-content:center}
+  .hero-stat strong{font-size:1.35rem}
+  .hero-stat span{font-size:.78rem}
+  .hero-actions{flex-direction:column;align-items:center;gap:.75rem;width:100%}
+  .btn-primary,.btn-outline{width:100%;justify-content:center;font-size:.92rem}
+  .hero-img-frame img{height:260px}
+  .hero-image-wrap{max-width:100%}
   .hero-float{display:none}
+  .hero-img-badge{padding:.6rem .9rem}
+  .hero-img-badge .num{font-size:1.2rem}
+
+  /* Trust bar — scrollable row on small screens */
+  .trust-bar{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .trust-inner{
+    flex-wrap:nowrap;
+    justify-content:flex-start;
+    gap:1.2rem;
+    padding:0 1.1rem;
+    width:max-content;
+    min-width:100%;
+  }
+  .trust-item{white-space:nowrap;font-size:.78rem}
+
+  /* Section headers */
+  .section-header{margin-bottom:2rem}
+  .section-header h2{font-size:1.5rem}
+  .section-header p{font-size:.93rem}
+
+  /* Why Germany */
+  .why-grid{grid-template-columns:1fr}
+  .why-card{padding:1.25rem}
+
+  /* Process steps */
+  .steps{grid-template-columns:1fr 1fr;gap:1rem}
+  .step-num{width:46px;height:46px;font-size:1rem}
+  .step h3{font-size:.92rem}
+  .step p{font-size:.82rem}
+
+  /* Gallery */
+  .gallery{padding:2.5rem 0}
+  .gallery-grid{grid-template-columns:1fr 1fr;gap:.6rem}
+
+  /* Eligibility */
+  .elig-img img{height:240px}
+
+  /* Salary table — horizontal scroll */
+  .salary-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .salary-table{min-width:520px;font-size:.82rem}
+  .salary-table th,.salary-table td{padding:.7rem .85rem}
+
+  /* Testimonials */
+  .testi-grid{grid-template-columns:1fr}
+
+  /* Contact & form */
+  .contact-inner{gap:2rem}
+  .form-card{padding:1.5rem 1.1rem;border-radius:14px}
+  .form-row{grid-template-columns:1fr}
+  .form-group input,
+  .form-group select,
+  .form-group textarea{font-size:1rem} /* prevent iOS zoom on focus */
+  .form-submit{font-size:.95rem;padding:.85rem}
+
+  /* FAQ */
+  .faq-q{font-size:.88rem;padding:.9rem 1rem}
+  .faq-item.open .faq-a{padding:0 1rem 1rem}
+
+  /* Footer */
+  .footer-inner{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;text-align:center;gap:.4rem}
+
+  /* WhatsApp float — smaller on mobile */
+  .wa-float{bottom:1.25rem;right:1.25rem;gap:.5rem}
+  .wa-btn{width:50px;height:50px}
+  .wa-btn svg{width:26px;height:26px}
+  .wa-label{font-size:.72rem;padding:.28rem .7rem}
 }
 
 /* ── ANIMATIONS ──────────────────────────────────── */
@@ -301,6 +428,17 @@ footer{background:var(--navy);color:rgba(255,255,255,.65);padding:3.5rem 0 2rem}
     </button>
   </div>
 </nav>
+
+<!-- ══ MOBILE MENU ══ -->
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">✕</button>
+  <a href="#why-germany" class="mobile-nav-link">Why Germany</a>
+  <a href="#process" class="mobile-nav-link">Our Process</a>
+  <a href="#eligibility" class="mobile-nav-link">Eligibility</a>
+  <a href="#salary" class="mobile-nav-link">Salary Guide</a>
+  <a href="#faq" class="mobile-nav-link">FAQ</a>
+  <a href="#contact" class="mobile-cta mobile-nav-link">Free Consultation →</a>
+</div>
 
 <!-- ══ HERO ══ -->
 <section class="hero">
@@ -793,6 +931,37 @@ footer{background:var(--navy);color:rgba(255,255,255,.65);padding:3.5rem 0 2rem}
 const nav = document.getElementById('main-nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ── HAMBURGER / MOBILE MENU ── */
+const hamburger    = document.getElementById('hamburger');
+const mobileMenu   = document.getElementById('mobile-menu');
+const menuClose    = document.getElementById('mobile-menu-close');
+const mobileLinks  = document.querySelectorAll('.mobile-nav-link');
+
+function openMenu(){
+  mobileMenu.classList.add('open');
+  hamburger.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenu(){
+  mobileMenu.classList.remove('open');
+  hamburger.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', () => {
+  mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+});
+menuClose.addEventListener('click', closeMenu);
+mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+// Close on outside tap
+mobileMenu.addEventListener('click', (e) => {
+  if(e.target === mobileMenu) closeMenu();
+});
+// Close on Escape
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape') closeMenu();
 });
 
 /* ── INTERSECTION OBSERVER (reveal) ── */
